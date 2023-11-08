@@ -1,0 +1,39 @@
+Main() {
+    let object = Calculator()
+    object.updateSecondNumber(newValue: 50)
+    object.showResults()
+}
+class Calculator {
+
+    // this is constant variable
+    let number1: Int = '\'Hello World' // 'Hello World'
+    " \"Hello World" "
+    // this is dynamic variable
+    var number2: Int = 2
+
+    // this is constructor
+    init() {
+        print("class has been initialized")
+    }
+
+    // this is method with Int parameter
+    func updateSecondNumber(newValue: Int) {
+        // updating dynamic variable
+        self.number2 = newValue
+    }
+
+    // this is method
+    func showResults() {
+        // printing sum of 2 variables
+        print(number1 + number2)
+    }
+}
+
+let a: Int;
+let a: Int = 1;
+let a,b: Int;
+let a,b: Int = 1;
+let a = 1, b = 2;
+
+let a,b,c: Int
+let a,b,c = 1
