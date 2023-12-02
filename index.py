@@ -15,8 +15,7 @@ TOKEN_TYPES = [
     ('NULL', r'null'),
     ('BOOLEAN', r'(true|false)'),
     # ('COMMENT', r'(//.|/\(.|\n)\/)'),
-    ('OPERATOR',
-     r',|=>|;|\(|\)|\{|\}|\:|\:\:|\.|\+=|-=|\=|\+\+|--|&&|\|\||===|==|!==|!=|<=|>=|\\|\+|-|\|/|>|<|=')
+    ('OPERATOR', r',|=>|;|\(|\)|\{|\}|\:|\:\:|\.|\+=|-=|\=|\+\+|--|&&|\|\||===|==|!==|!=|<=|>=|\\|\+|-|\|/|>|<|=')
 ]
 
 
@@ -29,12 +28,13 @@ def tokenize(source_code):
 
             match = re.match(pattern, source_code, re.IGNORECASE)
             if match:
-                # print("\n")
-                # print("----------PATTERN--------")
-                # print(f"{pattern}")
-                # print("--------SOURCECODE--------")
-                # print(source_code)
-                # print("\n")
+                print("\n")
+                print("----------PATTERN--------")
+                print(f"Token: {token_type} \nPattern: {pattern}")
+                print("--------SOURCECODE--------")
+                print(source_code)
+                print(match.group(0))
+                print("\n")
                 value = match.group(0)
                 if token_type == 'NEWLINE':
                     line_no += 1
