@@ -6,7 +6,7 @@ Main() {
 class Calculator {
 
     // this is constant variable
-    let number1: Int = '\'Hello World' // 'Hello World'
+    let number1: String = '\'Hello World' // 'Hello World'
     " \"Hello World" "
     // this is dynamic variable
     var number2: Int = 2
@@ -19,7 +19,7 @@ class Calculator {
     // this is method with Int parameter
     func updateSecondNumber(newValue: Int) {
         // updating dynamic variable
-        self.number2 = newValue
+        this.number2 = newValue
     }
 
     // this is method
