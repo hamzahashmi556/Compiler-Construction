@@ -1,9 +1,3 @@
-# This is a sample Python script.
-
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
-
-
 import re
 
 # Define token types
@@ -12,7 +6,7 @@ TOKEN_TYPES = [
     ('NULL_DATATYPE', r'\b(null)\b'),
     ('BOOLEAN_DATATYPE', r'\b(true|false)\b'),
     ('CHAR_DATATYPE', r'"[^"]{1}"|\'[^\']{1}\''),
-    ('STRING_DATATYPE', r'"[^"]*"|\'[^\']*\'|String'),
+    ('STRING_DATATYPE', r'"[^"]*"|\'[^\']*\''),
     ('FLOAT_DATATYPE', r'[0-9]*\.[0-9]+'),
     ('INT_DATATYPE', r'[0-9]+'),
     ('MAIN_KEYWORDS', r'\b(Main)\b'),
@@ -23,7 +17,9 @@ TOKEN_TYPES = [
     ('CONDITIONAL_KEYWORDS', r'\b(if|else\s*if|elif|else)\b'),
     ('ARRAY_STRING_OPERATIONS', r'\b(concat|replace|find|len)\b'),
     ('MATH_KEYWORDS', r'\b(pow|sqrt|range)\b'),
-    ('CLASS_KEYWORDS', r'\b(class|init|deinit|super|abstract|this|override)\b'),
+    ('CLASS_DECLARATION_KEYWORDS', r'\b(class)\b'),
+    ('INITIALIZER_KEYWORDS', r'\b(init|deinit)\b'),
+    ('INHERITANCE_KEYWORDS', r'\b(super|abstract|this|override)\b'),
     ('ACCESS_MODIFIERS_KEYWORDS', r'\b(private|protected|public)\b'),
     ('UTILITY_KEYWORDS', r'\b(return|print|exit)\b'),
     ('DATATYPE_KEYWORDS', r'\b(int|float|char|str|bool)\b'),
@@ -32,9 +28,10 @@ TOKEN_TYPES = [
     ('COMPARISON_OP', r'===|==|!==|!=|<=|>=|>|<'),
     ('INC_DEC_OP', r'\+\+|--'),
     ('ASSIGNMENT_OP', r'\+=|-=|\*=|\%=|='),
-    ('ARITHMETIC_OP', r'\+|-|\*|/|\*\*|%'),
+    ('POWER_OP', r'\*\*'),
+    ('MULTIPLICATIVE_OP', r'\*|/|%'),
+    ('ADDITIVE_OP', r'\+|-'),
     ('LOGICAL_OP', r'&&|\|\|'),
-    ('QUESTION_OP', r'\?'),
     ('COLON_OP', r':'),
     ('END_STATEMENT_OP', r';'),
     ('COMMA_OP', r','),
@@ -44,20 +41,14 @@ TOKEN_TYPES = [
     ('BRACKETS_OP', r'\[|\]'),
     ('NOT_OP', r'!'),
     ('DICTIONARY_OP', r'=>'),
-    ('SPACE', r' +')
+    ('SPACE', r' ')
 ]
-
 
 def tokenize(source_code):
     tokens = []
     line_no = 1
     while source_code:
-
         for token_type, pattern in TOKEN_TYPES:
-            # print("Token Type: ", token_type)
-            # print("Pattern: ",pattern)
-            # print("Source Code: ", source_code)
-
             match = re.match(pattern, source_code, re.IGNORECASE)
             if match:
                 value = match.group(0)
@@ -81,19 +72,11 @@ def tokenize(source_code):
         else:
             tokens.append(("Unexpected character", source_code[0], line_no))
             source_code = source_code[1:]
-
     return tokens
 
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    # Read source code from a file
-
-    filename = "mySourceCode.txt"
-    filename = "SourceCode2.txt"
-    with open(f"{filename}", "r") as file:
+    with open("mySourceCode.txt", "r") as file:
         source_code = file.read()
-
     tokens = tokenize(source_code)
     for token_type, value, line_no in tokens:
         print([token_type, value, line_no])
